@@ -1,0 +1,97 @@
+html {
+  position: relative;
+  box-sizing: border-box;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: inherit;
+}
+
+body {
+  min-width: 320px;
+  min-height: 100vh;
+  /*font-family: "Muller", Arial; !* устанавливаем шрифт*!*/
+  /* указать шрифт под проект*/
+  font-size: 16px;
+  font-weight: 400;
+  color: #000;
+  background-color: aquamarine;
+}
+
+
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+button,
+input {
+  font: inherit;
+}
+
+button {
+  cursor: pointer;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+h1,
+h2,
+h3,
+p,
+figure,
+fieldset {
+  margin: 0;
+
+}
+
+iframe {
+  border: none;
+}
+
+.visually-hidden {
+  position: absolute !important;
+  clip: rect(1px 1px 1px 1px);
+  /* IE6, IE7 */
+  clip: rect(1px, 1px, 1px, 1px);
+  padding: 0 !important;
+  border: 0 !important;
+  height: 1px !important;
+  width: 1px !important;
+  overflow: hidden;
+}
+
+.container {
+  max-width: 2560px;
+  margin: 0 auto;
+}
+
+/*custom style temp*/
+
+a {
+  color: #0d47a1;
+}
+
+.method_input, .comment_method_input, .result_method_input, .state_method_input {
+  background-color: #999999;
+}
+
+.dtn {
+  color: #b2ff59;
+  background-color: #0000CC;
+}
+
+.danger {
+  background-color: #b2ff59;
+}
