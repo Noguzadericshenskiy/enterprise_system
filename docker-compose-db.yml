@@ -6,7 +6,7 @@ services:
     environment:
       POSTGRES_USER: platform
       POSTGRES_PASSWORD: platform
-      POSTGRES_DB: si_platform
+      POSTGRES_DB: enterprise_system
       PGDATA: /var/lib/postgresql/data/pgdata
     volumes:
       - ./data:/var/lib/postgresql/data

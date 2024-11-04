@@ -1,0 +1,29 @@
+{% extends "si_system/index.html" %}
+
+{% block title %}
+    <title>Версия изделия</title>
+{% endblock %}
+
+{% block content %}
+    <h1>Добавить версию</h1>
+
+    {% if error_message %}
+        <p><strong>{{ error_message }}</strong></p>
+    {% endif %}
+
+    {% if messages %}
+    <ul class="messages">
+        {% for message in messages %}
+            <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+        {% endfor %}
+    </ul>
+    {% endif %}
+
+{#    <a href="{% url 'si_devices:index' %}">Вернутся к списку устройств </a>#}
+
+    <form method="post">{% csrf_token %}
+        {{ form.as_p }}
+
+        <input type="submit" value="Создать">
+    </form>
+{% endblock %}
