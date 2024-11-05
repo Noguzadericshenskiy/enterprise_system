@@ -8,6 +8,8 @@ app_name = 'si_devices'
 
 urlpatterns = [
     path("versions/success/<int:pk>", views.SuccessVersionView.as_view(), name="version_success"),
+    path("versions/edit/<int:pk>", views.EditVersionView.as_view(), name="version_edit"),
     path("versions/create/", views.CreateVersionView.as_view(), name="version_create"),
+    # path("version/", ),
 
 ]

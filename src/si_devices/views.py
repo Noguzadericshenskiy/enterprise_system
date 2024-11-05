@@ -14,9 +14,18 @@ class CreateVersionView(generic.CreateView):
 
     def get_success_url(self):
         obj = self.object
-        return reverse_lazy("si_devices:success", kwargs={"pk": obj.id})
+        return reverse_lazy("si_devices:version_success", kwargs={"pk": obj.id})
 
 
 class SuccessVersionView(generic.DetailView):
     model = Version
     template_name = "si_devices/version_success.html"
+
+
+class EditVersionView(generic.UpdateView):
+    model = Version
+    form_class = CreateVersionForm
+    template_name = ""
+    context_object_name = "versions"
+
+
