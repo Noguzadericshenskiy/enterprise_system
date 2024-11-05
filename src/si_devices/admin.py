@@ -1,3 +1,7 @@
 from django.contrib import admin
 
-# Register your models here.
+from si_devices.models import Device, Version
+
+
+admin.site.register(Device)
+admin.site.register(Version)
