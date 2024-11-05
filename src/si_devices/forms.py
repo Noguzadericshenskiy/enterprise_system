@@ -10,11 +10,11 @@ class CreateVersionForm(ModelForm):
         fields = ["name", "title"]
         widgets = {
             "name": forms.TextInput(attrs={"class": "form-control"}),
-            "title": forms.TextInput(attrs={"class": "form-control"})
+            "title": forms.TextInput()
         }
 
     def clean_name(self):
         name = self.cleaned_data["name"]
 
-        if not Version.objects.filter(name=name):
+        if Version.objects.filter(name=name):
             raise ValidationError("Такая версия уже есть")

@@ -1,0 +1,20 @@
+{% extends "si_system/index.html" %}
+
+{% block title %}
+    <title>Версия изделия</title>
+{% endblock %}
+
+{% block content %}
+    <h3>Версия {{ version.name }} успешно создана</h3>
+
+    {% if messages %}
+    <ul class="messages">
+        {% for message in messages %}
+            <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+        {% endfor %}
+    </ul>
+    {% endif %}
+
+    <p><a href="{% url 'si_devices:index' %}">Перейти к списку изделий</a></p>
+
+{% endblock %}
