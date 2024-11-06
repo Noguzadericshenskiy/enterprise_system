@@ -21,7 +21,7 @@ class Device(models.Model):
     date_created = models.DateTimeField(default=timezone.now, verbose_name="Дата создания")
     date_changed = models.DateTimeField(verbose_name="Дата изменения", null=True, blank=True)
     description = models.TextField(verbose_name="Описание", null=True, blank=True)
-    image = models.ImageField(upload_to="devices_images", null=True, blank=True)
+    image = models.ImageField(verbose_name="Рисунок", upload_to="devices_images", null=True, blank=True)
     # type_device = models.CharField(max_length=250, verbose_name="Тип изделия", null=True, blank=True)
 
     class Meta:

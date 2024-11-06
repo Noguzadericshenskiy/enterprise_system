@@ -12,7 +12,7 @@ urlpatterns = [
     path("versions/create/", views.VersionCreateView.as_view(), name="version_create"),
     path("versions/", views.VersionListView.as_view(), name="version_list"),
 
-    path("devices/<int:pk>/update/", views.DeviceUpdateView.as_view(), name="device_edit"),
-    path("devices/create/", views.DeviceCreateView.as_view(), name="device_create"),
-    path("devices/", views.DeviceListView.as_view(), name="device_list"),
+    path("<int:pk>/update/", views.DeviceUpdateView.as_view(), name="device_edit"),
+    path("create/", views.DeviceCreateView.as_view(), name="device_create"),
+    path("", views.DeviceListView.as_view(), name="device_list"),
 ]

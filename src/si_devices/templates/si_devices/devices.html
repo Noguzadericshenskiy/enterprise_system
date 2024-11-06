@@ -1,7 +1,28 @@
+{% extends "si_system/index.html" %}
+{% load static %}
+
+
+
+{% block title %}
+    <title>{{ context.title }}</title>
+{% endblock %}
+
+{% block content %}
+    <h1>{{ context.title }}</h1>
+    {% for device in context.devices%}
+        <div class="list-group">
+            <a href="#" class="list-group-item"> {{ device }} {{ device.get_type_release_display }}
+                {% if device.image %}
+                    <img src="{{ device.image.url }}" alt="">
+                {% endif %}
+            </a>
+        </div>
+    {% endfor %}
+{% endblock %}
 
 {#вывести рисунок#}
-<img class="card-img-top"
-     src="{{ class.metod.url }}"
-     alt="">
-{% extends "si_system/base.html" %}
-{% load static %}
+{#<img class="card-img-top"#}
+{#     src="{{ class.metod.url }}"#}
+{#     alt="">#}
+{#{% extends "si_system/base.html" %}#}
+{#{% load static %}#}

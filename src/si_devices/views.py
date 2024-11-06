@@ -41,11 +41,14 @@ class VersionListView(generic.ListView):
 
 class DeviceListView(generic.ListView):
     model = Device
-    context_object_name = "devices"
-    template_name = ""
+    context_object_name = "context"
+    template_name = "si_devices/devices.html"
 
     def get_queryset(self):
-        context = Device.objects.all()
+        context = {
+            "title": "Список изделий",
+            "devices": Device.objects.order_by("name")
+        }
         return context
 
 
@@ -71,10 +74,7 @@ class DeviceCreateView(generic.CreateView):
 
     def get_success_url(self):
         obj = self.object
-        return reverse_lazy("si_devices:device_list", kwargs={"pk": obj.id})
-
-    # def form_valid(self, form):
-    #     ...
+        return reverse_lazy("si_devices:device_list")
 
 
 class DeviceUpdateView(generic.UpdateView):
