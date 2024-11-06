@@ -37,7 +37,9 @@ SECRET_KEY = getenv("DJANGO_SECRET_KEY")
 DEBUG = getenv("DEBUG", default=False)
 
 
-ALLOWED_HOSTS = json.loads(getenv("DJANGO_ALLOWED_HOSTS"))
+if DEBUG:
+    ALLOWED_HOSTS = ["localhost", "127.0.0.1", "0.0.0.0"]
+# ALLOWED_HOSTS = json.loads(getenv("DJANGO_ALLOWED_HOSTS"))
 
 
 # Application definition
@@ -82,7 +84,6 @@ MIDDLEWARE = [
 #     THIRD_PARTY_APPS.append("debug_toolbar")
 
 
-
 ROOT_URLCONF = 'enterprise_system.urls'
 
 TEMPLATES = [
@@ -110,10 +111,10 @@ WSGI_APPLICATION = 'enterprise_system.wsgi.application'
 DATABASES = {
     "default": {
         'NAME': getenv("DB_NAME"),
-        'ENGINE': 'django.db.backends.postgresql',
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
         'USER': getenv("DB_USER"),
         'PASSWORD': getenv("DB_PASSWORD"),
-        'PORT': getenv("DB_PORT")
+        'PORT': getenv("DB_PORT"),
     },
 }
 

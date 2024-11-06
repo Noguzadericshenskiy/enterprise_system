@@ -1,14 +1,14 @@
 import logging
 
 from django import forms
-from django.forms import ModelForm
+
 from django.core.exceptions import ValidationError
 
 
 from si_devices.models import Device, Version
 
 
-class CreateVersionForm(ModelForm):
+class CreateVersionForm(forms.ModelForm):
     class Meta:
         model = Version
         fields = ["name", "description"]
@@ -26,3 +26,18 @@ class CreateVersionForm(ModelForm):
         return data
 
 
+class DeviceCreateForm(forms.ModelForm):
+
+    class Meta:
+        model = Device
+        fields = [
+            "name",
+            "version",
+            "bord",
+            "firmware",
+            "decimal_num",
+            "constructor",
+            "type_release",
+            "description",
+            "image"
+        ]

@@ -15,7 +15,7 @@ class Device(models.Model):
     bord = models.CharField(max_length=100, verbose_name="Плата", null=True, blank=True)
     firmware = models.CharField(max_length=50, verbose_name="Прошивка", null=True, blank=True)
     decimal_num = models.CharField(max_length=150, verbose_name="Децимальный номер")
-    designer = models.CharField(max_length=200, verbose_name="Конструктор")
+    constructor = models.CharField(max_length=200, verbose_name="Конструктор")
     engineer = models.CharField(max_length=200, verbose_name="Изменил", null=True, blank=True)
     type_release = models.CharField(max_length=50, choices=CHOICES_DEVICE_TYPE_RELEASE, default="1", verbose_name="Вид выпуска")
     date_created = models.DateTimeField(default=timezone.now, verbose_name="Дата создания")
@@ -38,7 +38,7 @@ class Device(models.Model):
 
 class Version(models.Model):
     name = models.CharField(max_length=10, verbose_name="Версия изделия", unique=True)
-    description = models.TextField(max_length=250, verbose_name="Описание", null=True, blank=True)
+    description = models.TextField(verbose_name="Описание", null=True, blank=True)
 
     class Meta:
         verbose_name = "Версия"
@@ -46,3 +46,4 @@ class Version(models.Model):
 
     def __str__(self):
         return f"{self.name}"
+
