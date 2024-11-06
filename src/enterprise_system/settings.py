@@ -56,7 +56,7 @@ PROJECT_APPS = [
     "si_system.apps.SiSystemConfig",
     "si_devices.apps.SiDevicesConfig",
     # "si_tests.apps.SiTestsConfig",
-    # "si_users.apps.SiUsersConfig",
+    "si_users.apps.SiUsersConfig",
 ]
 
 THIRD_PARTY_APPS = [
@@ -154,3 +154,7 @@ MEDIA_ROOT = BASE_DIR / "media"
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+# Users
+
+AUTH_USER_MODEL = "si_users.User"

@@ -25,7 +25,9 @@ from si_system.views import index
 urlpatterns = [
     path("devices/", include("si_devices.urls", namespace="si_devices")),
     path("admin/", admin.site.urls),
+    path("users/", include("si_users.urls", namespace="si_users")),
     path("", index, name="index"),
+
 ]
 
 # Запуск медиафайлов локально
