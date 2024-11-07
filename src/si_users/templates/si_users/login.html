@@ -1,10 +1,32 @@
+{% load static %}
+
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+    <head>
+        <meta charset="UTF-8">
 
-</body>
+        <meta name="description" content=""/>
+        <meta name="author" content="Noguzadericshenskiy"/>
+        <link rel="stylesheet" href="{% static 'css/users.css' %}"/>
+        <title>LogIn</title>
+    </head>
+    <body>
+        {% if form.non_field_errors %}
+            <div class="alert alert-warning alert-dismissible fade show">
+                {{ form.non_field_errors }}
+            </div>
+        {% endif %}
+        <div class="login">
+        <h1>Login</h1>
+            <form action="{% url "si_users:login" %}" method="post">{% csrf_token %}
+                {{ form.username }}
+                {{ form.password }}
+{#               Вывести сбоку описание?? #}
+{#                {{ form.username.id_for_label }} #}
+
+                <button type="submit" class="btn btn-primary btn-block btn-large">Let me in.</button>
+            </form>
+        </div>
+    </body>
 </html>
+

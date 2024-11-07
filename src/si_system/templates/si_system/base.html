@@ -16,7 +16,7 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 
     {% block css %}
-      {#    <link rel="stylesheet" href="{% static 'css/style.css' %}">#}
+          <link rel="stylesheet" href="{% static 'css/style.css' %}">
     {% endblock %}
 
 
@@ -100,8 +100,9 @@
         </ul>
 
         <div class="inline my-2 my-lg-0">
-            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Войти</button>
-            <a class="button" href="#">Link</a>
+            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Войти b</button>
+            <a class="btn btn-outline-success my-2 my-sm-0" href="{% url "si_users:login" %}">Войти а</a>
+            <a class="btn button" href="{% url "si_users:login" %}">Регистрация</a>
         </div>
 
 

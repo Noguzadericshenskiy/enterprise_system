@@ -1,9 +1,53 @@
-from django.shortcuts import render
+from django.shortcuts import render, HttpResponseRedirect
+from django.contrib import auth
+from django.urls import reverse
+
+from si_users.models import User
+from si_users.forms import UserLoginForm, UserRegistrationForm, UserProfileForm
+
 
 
 def login(request):
-    return render(request, "si_users/login.html")
+    if request.method == "POST":
+        form = UserLoginForm(data=request.POST)
+        if form.is_valid():
+            username = request.POST["username"]
+            password = request.POST["password"]
+            user = auth.authenticate(username=username, password=password)
+            if user:
+                auth.login(request, user)
+                # добавть доп проверку если пользователь одобрен
+                return HttpResponseRedirect(reverse("index"))
+
+    else:
+        form = UserLoginForm()
+
+    context = {"form": form}
+
+    return render(request, "si_users/login.html", context)
 
 
 def registration(request):
-    return render(request, "si_users/registration.html")
+    if request.method =="POST":
+        form = UserRegistrationForm(data=request.POST)
+        if form.is_valid():
+            form.save()
+            # Изменить переход на перевести пользователя на страницу вывода сообщения
+            # об ожидании подтверждения регистрации
+            return HttpResponseRedirect(reverse("si_users:login"))
+        else:
+            form = UserRegistrationForm()
+        context = {form: form}
+        return render(request, "si_users/registration.html", context)
+
+
+def profile(request):
+    if request.method == "POST":
+        form = UserProfileForm(instance=request.user, data=request.POST, files=request.FILES)
+        if form.is_valid():
+            form.save()
+            return HttpResponseRedirect(reverse("si_users:profile"))
+
+    form = UserProfileForm(instance=request.user)
+    context = {"title": "Профиль пользователя", "form": form}
+    return render(request, "si_users/profile.html", context)
