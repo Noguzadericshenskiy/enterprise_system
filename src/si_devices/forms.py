@@ -1,9 +1,6 @@
 import logging
-
 from django import forms
-
 from django.core.exceptions import ValidationError
-
 
 from si_devices.models import Device, Version
 
@@ -27,7 +24,6 @@ class CreateVersionForm(forms.ModelForm):
 
 
 class DeviceCreateForm(forms.ModelForm):
-
     class Meta:
         model = Device
         fields = [
@@ -41,3 +37,41 @@ class DeviceCreateForm(forms.ModelForm):
             "description",
             "image"
         ]
+
+    def clean(self):
+        data = self.cleaned_data
+        name = data["name"]
+        bord = data["bord"]
+        version = data["version"]
+
+        if Device.objects.filter(name=name, bord=bord, version__name=version):
+            raise ValidationError(f"Такое изделие уже есть! Наименование + версия + плата должно быть уникально!")
+        else:
+            return data
+
+
+class DeviceUpdateForm(forms.ModelForm):
+    class Meta:
+        model = Device
+        fields = [
+            "name",
+            "version",
+            "bord",
+            "firmware",
+            "decimal_num",
+            "type_release",
+            "description",
+            "image"
+        ]
+
+    def clean(self):
+        data = self.cleaned_data
+        name = data["name"]
+        bord = data["bord"]
+        version = data["version"]
+
+        if Device.objects.filter(name=name, bord=bord, version__name=version):
+            raise ValidationError(f"Такое изделие уже есть!\n Наименование + версия + плата должно быть уникально!")
+        else:
+            return data
+

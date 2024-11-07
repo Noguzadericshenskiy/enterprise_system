@@ -1,12 +1,17 @@
 {% extends "si_system/base.html" %}
 {% load static %}
-
+<link rel="stylesheet" href="{% static 'css/error.css' %}">
 {% block title %} Создать изделие {% endblock %}
 
 {% block content %}
 <h1>Создать изделие</h1>
 
-{% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
+{% if error_message %}
+    <p class="err error-decor ">
+        <strong>{{ error_message }}
+        </strong>
+    </p>
+{% endif %}
 
 
 {#    <form action="{% url 'si_devices:results' device.id %}" method="post">{% csrf_token %}#}
