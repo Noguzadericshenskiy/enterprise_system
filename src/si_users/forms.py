@@ -20,7 +20,7 @@ class UserLoginForm(AuthenticationForm):
 
 
 class UserRegistrationForm(UserCreationForm):
-    first_name = forms.CharField(widget=forms.TextInput(attrs={"placeholder": "Введите имя"}))
+    first_name = forms.CharField(widget=forms.TextInput(attrs={"placeholder": "Введите имя", }))
     last_name = forms.CharField(widget=forms.TextInput(attrs={"placeholder": "Введите фамилию"}))
     username = forms.CharField(widget=forms.TextInput(attrs={"placeholder": "Введите имя пользователя"}))
     email = forms.CharField(widget=forms.EmailInput(attrs={"placeholder": "Введите E-Mail"}))

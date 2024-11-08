@@ -1,10 +1,54 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+{% extends "si_users/base.html" %}
+{% load static %}
 
-</body>
-</html>
+{% block title %}
+    <title>Регистрация пользователя</title>
+{% endblock %}
+
+{% block content %}
+    <div class="container">
+        <div class="row">
+            <div class="col-8">
+                <h2 style="color: deepskyblue">Регистрация пользователя.</h2>
+            </div>
+        </div>
+
+        <div class="wrapper">
+            <form action="{% url "si_users:login" %}" method="post">{% csrf_token %}
+                <div class="row">
+                    <label class="col-2">Имя: </label>
+                    <div class="col-4">{{ form.first_name }}</div>
+                </div>
+
+                <div class="row">
+                    <label class="col-2">Фамилия: </label>
+                    <div class="col-4">{{ form.last_name }}</div>
+                </div>
+
+                <div class="row">
+                    <label class="col-2">Имя пользователя: </label>
+                    <div class="col-4">{{ form.username }}</div>
+                </div>
+
+                <div class="row">
+                    <label class="col-2">e-mail: </label>
+                    <div class="col-4">{{ form.email }}</div>
+                </div>
+
+                <div class="row">
+                    <label class="col-2">Пароль: </label>
+                    <div class="col-4">{{ form.password1 }}</div>
+                </div>
+
+                <div class="row">
+                    <label class="col-2">Подтверждение пароля: </label>
+                    <div class="col-4">{{ form.password2 }}</div>
+                </div>
+
+                <button type="submit" class=" col-3 btn btn-primary btn-block btn-large">Отправить</button>
+            </form>
+        </div>
+    </div>
+{% endblock %}
+
+

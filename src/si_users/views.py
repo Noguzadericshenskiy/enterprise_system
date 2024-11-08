@@ -6,7 +6,6 @@ from si_users.models import User
 from si_users.forms import UserLoginForm, UserRegistrationForm, UserProfileForm
 
 
-
 def login(request):
     if request.method == "POST":
         form = UserLoginForm(data=request.POST)
@@ -14,21 +13,30 @@ def login(request):
             username = request.POST["username"]
             password = request.POST["password"]
             user = auth.authenticate(username=username, password=password)
-            if user:
-                auth.login(request, user)
-                # добавть доп проверку если пользователь одобрен
-                return HttpResponseRedirect(reverse("index"))
 
+            if user:
+                # добавть доп проверку если пользователь одобрен
+                if user.approved:
+                    auth.login(request, user)
+                    return HttpResponseRedirect(reverse("index"))
+                else:
+                    context = {
+                        "form": form,
+                        "error_messages": {
+                            "not_approved": "Пользователь не аккредитован!"
+                            "Обратитесь к администратору для получения аккредитации.",
+                        },
+                    }
+                    render(request, "si_users/login.html", context)
     else:
         form = UserLoginForm()
 
     context = {"form": form}
-
     return render(request, "si_users/login.html", context)
 
 
 def registration(request):
-    if request.method =="POST":
+    if request.method == "POST":
         form = UserRegistrationForm(data=request.POST)
         if form.is_valid():
             form.save()
@@ -37,8 +45,8 @@ def registration(request):
             return HttpResponseRedirect(reverse("si_users:login"))
         else:
             form = UserRegistrationForm()
-        context = {form: form}
-        return render(request, "si_users/registration.html", context)
+            context = {"form": form}
+            return render(request, "si_users/registration.html", context)
 
 
 def profile(request):

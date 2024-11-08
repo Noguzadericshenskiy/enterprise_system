@@ -115,6 +115,7 @@ DATABASES = {
         'USER': getenv("DB_USER"),
         'PASSWORD': getenv("DB_PASSWORD"),
         'PORT': getenv("DB_PORT"),
+        "options":"-c client_encoding=UTF8",
     },
 }
 
