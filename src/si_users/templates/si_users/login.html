@@ -7,11 +7,19 @@
 
 {% block content %}
     <div class="container">
-        {% if form.non_field_errors %}
+        {% if messages or form.non_field_errors %}
             <div class="row justify-content-center align-items-end">
                 <div class="col-8">
-                    <div class="alert alert-warning alert-dismissible fade show">
-                        {{ form.non_field_errors }}
+                    <div class="alert
+                     {% if messages %} alert-succes {% else %} alert-warning {% endif %} 
+                     alert-dismissible fade show">
+                        {% if messages %}
+                            {% for message in messages %}
+                                {{ message }}
+                            {% endfor %}
+                        {% else %}
+                            {{ form.non_field_errors }}
+                        {% endif %}    
                     </div>
                     {#                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Blanditiis debitis eos perferendis#}
                     {#                    veniam.#}

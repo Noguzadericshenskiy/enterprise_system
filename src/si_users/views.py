@@ -1,5 +1,5 @@
 from django.shortcuts import render, HttpResponseRedirect
-from django.contrib import auth
+from django.contrib import auth, messages
 from django.urls import reverse
 
 from si_users.models import User
@@ -16,18 +16,18 @@ def login(request):
 
             if user:
                 # добавть доп проверку если пользователь одобрен
-                if user.approved:
+                # if user.approved:
                     auth.login(request, user)
                     return HttpResponseRedirect(reverse("index"))
-                else:
-                    context = {
-                        "form": form,
-                        "error_messages": {
-                            "not_approved": "Пользователь не аккредитован!"
-                            "Обратитесь к администратору для получения аккредитации.",
-                        },
-                    }
-                    render(request, "si_users/login.html", context)
+                # else:
+                #     context = {
+                #         "form": form,
+                #         "error_messages": {
+                #             "not_approved": "Пользователь не аккредитован!"
+                #             "Обратитесь к администратору для получения аккредитации.",
+                #         },
+                #     }
+                #     render(request, "si_users/login.html", context)
     else:
         form = UserLoginForm()
 
@@ -40,13 +40,14 @@ def registration(request):
         form = UserRegistrationForm(data=request.POST)
         if form.is_valid():
             form.save()
+            messages.success(request, "Вы успешно зарегистрировались! Для активации аккаунта необходимо сообщить администратору!")
             # Изменить переход на перевести пользователя на страницу вывода сообщения
             # об ожидании подтверждения регистрации
             return HttpResponseRedirect(reverse("si_users:login"))
-        else:
-            form = UserRegistrationForm()
-            context = {"form": form}
-            return render(request, "si_users/registration.html", context)
+    else:
+        form = UserRegistrationForm()
+    context = {"form": form}
+    return render(request, "si_users/registration.html", context)
 
 
 def profile(request):
@@ -59,3 +60,8 @@ def profile(request):
     form = UserProfileForm(instance=request.user)
     context = {"title": "Профиль пользователя", "form": form}
     return render(request, "si_users/profile.html", context)
+
+
+def logout(request):
+    auth.logout(request)
+    return HttpResponseRedirect(reverse("si_users:login"))
