@@ -1,23 +1,64 @@
 {% extends "si_system/index.html" %}
 {% load static %}
 
-
-
 {% block title %}
     <title>{{ context.title }}</title>
 {% endblock %}
 
 {% block content %}
     <h1>{{ context.title }}</h1>
-    {% for device in context.devices%}
-        <div class="list-group">
-            <a href="#" class="list-group-item"> {{ device }} {{ device.get_type_release_display }}
-                {% if device.image %}
-                    <img src="{{ device.image.url }}" alt="">
-                {% endif %}
-            </a>
-        </div>
-    {% endfor %}
+
+    <div class="wrapper">
+        <table class="table table-bordered table-bordered">
+            <thead>
+                <th scope="col">Изделие</th>
+                <th scope="col">Изделие</th>
+                <th scope="col">Версия</th>
+                <th scope="col">плата</th>
+                <th scope="col">Прошивка</th>
+                <th scope="col">Тип выпуска</th>
+                <th scope="col">Дец. номер</th>
+                <th scope="col">Конструуктор</th>
+                <th scope="col">Обновление</th>
+            </thead>
+
+            <tbody>
+            {% for device in context.devices %}
+                <tr>
+                    <td>
+                        <a href="{% url "si_devices:device_detail" device.id %}"
+                           class="list-group-item"> {{ device.full_name }}
+                        </a>
+                    </td>
+                    <td>{{ device.name }}</td>
+                    <td>{{ device.version }}</td>
+                    <td>{{ device.bord }}</td>
+                    <td>{{ device.firmware }}</td>
+                    <td {% if device.type_release == 1 %} class="table-success" 
+                        {% elif device.type_release == 2 %} class="table-warning"
+                        {% else %} class="table-info"                                
+                        {% endif %}>
+                        {{ device.get_type_release_display }}
+                    </td>
+                    <td >{{ device.decimal_num }}</td>
+                    <td>{{ device.constructor }}</td>
+                    <td>{{ device.changed_timestamp }}</td>
+                </tr>    
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+{#    {% for device in context.devices %}#}
+{#        <div class="list-group">#}
+{#            <a href="{% url "si_devices:device_detail" device.id %}"#}
+{#               class="list-group-item"> {{ device }} {{ device.get_type_release_display }}#}
+{#                {% if device.image %}#}
+{#                    <img src="{{ device.image.url }}" alt="">#}
+{#                {% endif %}#}
+{#            </a>#}
+{#        </div>#}
+{#    {% endfor %}#}
 {% endblock %}
 
 {#вывести рисунок#}

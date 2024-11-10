@@ -2,11 +2,18 @@ from django.db import models
 from django.utils import timezone
 
 
+
 CHOICES_DEVICE_TYPE_RELEASE = (
     ("1", "Серия"),
     ("2", "Опытное"),
     ("3", "Иное"),
 )
+
+
+# переопределение QuerySet для Devices
+# class DeviceQuerySet(models.QuerySet):
+#     def total_quantity(self):
+#         return sum(device for device in self.all())
 
 
 class Device(models.Model):
@@ -19,7 +26,7 @@ class Device(models.Model):
     engineer = models.CharField(max_length=200, verbose_name="Изменил", null=True, blank=True)
     type_release = models.CharField(max_length=50, choices=CHOICES_DEVICE_TYPE_RELEASE, default="1", verbose_name="Вид выпуска")
     date_created = models.DateTimeField(default=timezone.now, verbose_name="Дата создания")
-    date_changed = models.DateTimeField(verbose_name="Дата изменения", null=True, blank=True)
+    changed_timestamp = models.DateTimeField(auto_now_add=True, verbose_name="Дата изменения", null=True, blank=True)
     description = models.TextField(verbose_name="Описание", null=True, blank=True)
     image = models.ImageField(verbose_name="Рисунок", upload_to="devices_images", null=True, blank=True)
     # type_device = models.CharField(max_length=250, verbose_name="Тип изделия", null=True, blank=True)
@@ -30,10 +37,19 @@ class Device(models.Model):
 
     @property
     def full_name(self):
-        return f"{self.name} {self.version.name} {self.bord}"
+        if self.version.name == "00":
+            return f"{self.name} {self.bord}"
+        else:
+            return f"{self.name} исп.{self.version.name} {self.bord}"
 
     def __str__(self):
-        return f"{self.name} {self.version.name} {self.bord}"
+        if self.version.name == "00":
+            return f"{self.name} {self.bord}"
+        else:
+            return f"{self.name} исп.{self.version.name} {self.bord}"
+
+
+    # objects = DeviceQuerySet.as_manager()
 
 
 class Version(models.Model):
@@ -46,4 +62,6 @@ class Version(models.Model):
 
     def __str__(self):
         return f"{self.name}"
+
+
 

@@ -1,9 +1,14 @@
-from django.shortcuts import render
+from fileinput import filename
+from lib2to3.fixes.fix_input import context
+
 from django.views import generic
 from django.urls import reverse_lazy
+from django.contrib.auth.decorators import login_required
+from django.core.files.storage import FileSystemStorage
 
 from si_devices.forms import CreateVersionForm, DeviceCreateForm
 from si_devices.models import Version, Device
+
 
 
 class VersionCreateView(generic.CreateView):
@@ -32,11 +37,19 @@ class VersionEditView(generic.UpdateView):
 class VersionListView(generic.ListView):
     model = Version
     context_object_name = "device_versions"
-    template_name = ""
+    template_name = "si_devices/versions.html"
+
 
     def get_queryset(self):
-        context = Version.objects.all()
+        context = {}
+        context["title"] = "Версии"
+        context["versions"] = Version.objects.all()
         return context
+
+    # def get_context_data(self, **kwargs):
+    #     con = {}
+    #     con["title"] = "Версии"
+
 
 
 class DeviceListView(generic.ListView):
@@ -55,15 +68,13 @@ class DeviceListView(generic.ListView):
 class DeviceDetailView(generic.DetailView):
     model = Device
     context_object_name = "device"
-    template_name = ""
+    template_name = "si_devices/device_detail.html"
     #
-    # def get_context_data(self, **kwargs):
-    #     context = super().get_context_data(**kwargs)
-    #     context["pk"] = self.kwargs["pk"]
-    #     return context
-
-    def get_queryset(self):
-        return Device.objects.get(self.kwargs["pk"])
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data()
+        context["description"] = Device.objects.get(pk=self.kwargs["pk"])
+        context["title"] = "Информация о изделии:"
+        return context
 
 
 class DeviceCreateView(generic.CreateView):
@@ -78,7 +89,8 @@ class DeviceCreateView(generic.CreateView):
 
 
 class DeviceUpdateView(generic.UpdateView):
-    ...
+    def dispatch(self, request, *args, **kwargs):
+        ...
 
 
 

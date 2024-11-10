@@ -1,0 +1,20 @@
+{% extends "si_system/index.html" %}
+{% load static %}
+
+{% block title %}
+    <title>{{ device_versions.title }}</title>
+{% endblock %}
+
+{% block content %}
+    <h3>{{ device_versions.title }} изделий.</h3>
+    
+    {% if device_versions.versions %}
+        {% for version in device_versions.versions %}
+            <ul>
+                <li>{{ version }} | {{ version.name }} | {{ version.description }}</li>
+            </ul>
+        {% endfor %}
+    {% else %}
+        <span>Версии не созданы</span>
+    {% endif %}
+{% endblock %}

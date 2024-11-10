@@ -38,8 +38,8 @@ DEBUG = getenv("DEBUG", default=False)
 
 
 # if DEBUG:
-ALLOWED_HOSTS = ["localhost", "127.0.0.1", "0.0.0.0"]
-# ALLOWED_HOSTS = []
+# ALLOWED_HOSTS = ["localhost", "127.0.0.1", "0.0.0.0"]
+ALLOWED_HOSTS = []
 # ALLOWED_HOSTS = json.loads(getenv("DJANGO_ALLOWED_HOSTS"))
 
 
@@ -58,6 +58,7 @@ PROJECT_APPS = [
     "si_devices.apps.SiDevicesConfig",
     # "si_tests.apps.SiTestsConfig",
     "si_users.apps.SiUsersConfig",
+
 ]
 
 THIRD_PARTY_APPS = [
@@ -110,21 +111,21 @@ WSGI_APPLICATION = 'enterprise_system.wsgi.application'
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 
 DATABASES = {
-    #     "default": {
-    #         "ENGINE": "django.db.backends.sqlite3",
-    #          "NAME": "mydatabase",
-    #     }
-    "default": {
-        'NAME': getenv("DB_NAME"),
-        'ENGINE': 'django.db.backends.postgresql',
-        'USER': getenv("DB_USER"),
-        'PASSWORD': getenv("DB_PASSWORD"),
-        'PORT': getenv("DB_PORT"),
+        "default": {
+            "ENGINE": "django.db.backends.sqlite3",
+             "NAME": "mydatabase",
+        }
+    # "default": {
+    #     'NAME': getenv("DB_NAME"),
+    #     'ENGINE': 'django.db.backends.postgresql',
+    #     'USER': getenv("DB_USER"),
+    #     'PASSWORD': getenv("DB_PASSWORD"),
+    #     'PORT': getenv("DB_PORT"),
         # 'PORT': 5433,
         # "HOST": "localhost",
         # "client_encoding": 'UTF8',
         # "OPTIONS": {"default_transaction_isolation": 'read committed'},
-    },
+    # },
 }
 
 # Password validation
@@ -167,3 +168,4 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 # Users
 
 AUTH_USER_MODEL = "si_users.User"
+LOGIN_URL = '/si_users/login/'

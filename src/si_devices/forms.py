@@ -1,9 +1,7 @@
 import logging
 
 from django import forms
-
 from django.core.exceptions import ValidationError
-
 
 from si_devices.models import Device, Version
 
@@ -27,6 +25,10 @@ class CreateVersionForm(forms.ModelForm):
 
 
 class DeviceCreateForm(forms.ModelForm):
+    image = forms.ImageField(widget=forms.FileInput(), required=False )
+        # "name": "file_device",
+        # "class": "form-control"
+
 
     class Meta:
         model = Device
