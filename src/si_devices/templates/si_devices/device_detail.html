@@ -12,6 +12,12 @@
         <div class="col-4" style="background-color: #f5dd5d">
             блок информации
             {% block info_device %}
+                <div class="d-flex justify-content-end">
+                    {#                    <div class="inline my-2 my-lg-0">#}
+                    <a class="btn btn-info  my-2 my-sm-0" href="#">Изменить</a>
+                    {#                    </div>#}
+                </div>
+
                 <table class="table table-info table-striped">
                     <thead>
                     <th scope="col">Параметр</th>
@@ -38,7 +44,7 @@
                         <td>{{ description.firmware }}</td>
                     </tr>
                     <tr>
-                        <td>Децимальный номен:</td>
+                        <td>Децимальный номер:</td>
                         <td>{{ description.decimal_num }}</td>
                     </tr>
                     <tr {% if description.get_type_release_display == "Серия" %}
@@ -59,12 +65,19 @@
                 </table>
             {% endblock %}
         </div>
-        <div class="col-8" style="background-color: #5b80b2">
-            блок правый
-            {% block testing_device %}
 
+        <div class="col-8" style="background-color: #5b80b2">блок заметок по изделию
+            {% block notebook_device %}
 
             {% endblock %}
         </div>
+    </div>
+
+    <div class="row">
+        {% block testing_device %}
+            <h3 class="col">Испытания</h3>
+            <div class="col-12">Блок испытаний
+            </div>
+        {% endblock %}
     </div>
 {% endblock %}
