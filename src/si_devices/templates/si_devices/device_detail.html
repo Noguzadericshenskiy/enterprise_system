@@ -12,14 +12,18 @@
         <div class="col-4 " style="background-color: #f5dd5d">
             блок информации
             {% block info_device %}
-                <div hx-target="this" hx-swap="outerHTML">
+                <div hx-target="this" 
+                     hx-swap="outerHTML" 
+                     >
 
-                    <div class="d-flex justify-content-end">
+{#                    <div class="d-flex justify-content-end">#}
                         {#                    <div class="inline my-2 my-lg-0">#}
-                        <a class="btn btn-info  my-2 my-sm-0" href="#">Изменить</a>
+                        <button hx-get="{% url "si_devices:device_edit" description.id %}" class="btn btn-info">
+                            Изменить btn
+                        </button>
+{#                        <a class="btn btn-info  my-2 my-sm-0" href="#">Изменить</a>#}
                         {#                    </div>#}
-                    </div>
-
+{#                    </div>#}
                     <table class="table table-info table-striped">
                         <thead>
                         <th scope="col">Параметр</th>

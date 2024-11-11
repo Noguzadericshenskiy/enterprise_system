@@ -45,30 +45,29 @@ class DeviceCreateForm(forms.ModelForm):
         ]
 
 
-
 class DeviceEditForm(forms.ModelForm):
     name = forms.CharField(widget=forms.TextInput(attrs={}),)
     version = forms.CharField(widget=forms.TextInput(),)
-    bord = forms.CharField(widget=forms.TextInput(),)
-    firmware = forms.CharField(widget=forms.TextInput(),)
-    decimal_num = forms.CharField(widget=forms.TextInput(),)
-    constructor = forms.CharField(widget=forms.TextInput(),)
-    type_release = forms.CharField(widget=forms.TextInput(),)
-    description = forms.CharField(widget=forms.TextInput())
-    image = forms.ImageField(widget=forms.FileInput(), required=False)
+    # bord = forms.CharField(widget=forms.TextInput(),)
+    # firmware = forms.CharField(widget=forms.TextInput(),)
+    # decimal_num = forms.CharField(widget=forms.TextInput(),)
+    # constructor = forms.CharField(widget=forms.TextInput(),)
+    # type_release = forms.CharField(widget=forms.TextInput(),)
+    # description = forms.CharField(widget=forms.TextInput())
+    # image = forms.ImageField(widget=forms.FileInput(), required=False)
 
     class Meta:
         model = Device
         fields = [
             "name",
             "version",
-            "bord",
-            "firmware",
-            "decimal_num",
-            "constructor",
-            "type_release",
-            "description",
-            "image"
+            # "bord",
+            # "firmware",
+            # "decimal_num",
+            # "constructor",
+            # "type_release",
+            # "description",
+            # "image"
         ]
 
 

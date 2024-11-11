@@ -1,12 +1,13 @@
+from audioop import reverse
 from fileinput import filename
 from lib2to3.fixes.fix_input import context
 
 from django.views import generic
-from django.urls import reverse_lazy
+from django.urls import reverse_lazy, reverse
 from django.contrib.auth.decorators import login_required
 from django.core.files.storage import FileSystemStorage
 
-from si_devices.forms import CreateVersionForm, DeviceCreateForm
+from si_devices.forms import CreateVersionForm, DeviceCreateForm, DeviceEditForm
 from si_devices.models import Version, Device
 
 
@@ -89,13 +90,18 @@ class DeviceCreateView(generic.CreateView):
 
 
 class DeviceUpdateView(generic.UpdateView):
-    def dispatch(self, request, *args, **kwargs):
-        ...
+    # def dispatch(self, request, *args, **kwargs):
+    model = Device
+    form_class = DeviceEditForm
+    template_name = "si_devices/device_edit.html"
+    context_object_name = "device"
+
+    def get_success_url(self):
+        obj = self.object.id
+        print(obj)
+        return reverse("si_devices:device_detail", kwargs={"pk": obj})
 
 
 
 
-
-
-
-
+# return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
