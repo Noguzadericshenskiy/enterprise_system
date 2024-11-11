@@ -9,60 +9,63 @@
     <h3>{{ title }} {{ description.full_name }} </h3>
 
     <div class="row">
-        <div class="col-4" style="background-color: #f5dd5d">
+        <div class="col-4 " style="background-color: #f5dd5d">
             блок информации
             {% block info_device %}
-                <div class="d-flex justify-content-end">
-                    {#                    <div class="inline my-2 my-lg-0">#}
-                    <a class="btn btn-info  my-2 my-sm-0" href="#">Изменить</a>
-                    {#                    </div>#}
+                <div hx-target="this" hx-swap="outerHTML">
+
+                    <div class="d-flex justify-content-end">
+                        {#                    <div class="inline my-2 my-lg-0">#}
+                        <a class="btn btn-info  my-2 my-sm-0" href="#">Изменить</a>
+                        {#                    </div>#}
+                    </div>
+
+                    <table class="table table-info table-striped">
+                        <thead>
+                        <th scope="col">Параметр</th>
+                        <th scope="col">Значение</th>
+                        </thead>
+
+                        <tbody>
+                        <tr>
+                            <td class="col-2">Наименование:</td>
+                            <td class="col-3">{{ description.name }}</td>
+                        </tr>
+
+                        <tr>
+                            <td>Версия:</td>
+                            <td>{{ description.version }}</td>
+                        </tr>
+
+                        <tr>
+                            <td>Плата:</td>
+                            <td>{{ description.bord }}</td>
+                        </tr>
+                        <tr>
+                            <td>Прошивка:</td>
+                            <td>{{ description.firmware }}</td>
+                        </tr>
+                        <tr>
+                            <td>Децимальный номер:</td>
+                            <td>{{ description.decimal_num }}</td>
+                        </tr>
+                        <tr {% if description.get_type_release_display == "Серия" %}
+                            class="table-success" {% elif description.get_type_release_display == "Опытное" %}
+                            class="table-warning" {% endif %}>
+                            <td>Тип выпуска:</td>
+                            <td>{{ description.get_type_release_display }}</td>
+                        </tr>
+                        <tr>
+                            <td>Конструктор:</td>
+                            <td>{{ description.constructor }}</td>
+                        </tr>
+                        <tr>
+                            <td>Описание:</td>
+                            <td>{{ description.description }}</td>
+                        </tr>
+                        </tbody>
+                    </table>
                 </div>
-
-                <table class="table table-info table-striped">
-                    <thead>
-                    <th scope="col">Параметр</th>
-                    <th scope="col">Значение</th>
-                    </thead>
-
-                    <tbody>
-                    <tr>
-                        <td class="col-2">Наименование:</td>
-                        <td class="col-3">{{ description.name }}</td>
-                    </tr>
-
-                    <tr>
-                        <td>Версия:</td>
-                        <td>{{ description.version }}</td>
-                    </tr>
-
-                    <tr>
-                        <td>Плата:</td>
-                        <td>{{ description.bord }}</td>
-                    </tr>
-                    <tr>
-                        <td>Прошивка:</td>
-                        <td>{{ description.firmware }}</td>
-                    </tr>
-                    <tr>
-                        <td>Децимальный номер:</td>
-                        <td>{{ description.decimal_num }}</td>
-                    </tr>
-                    <tr {% if description.get_type_release_display == "Серия" %}
-                        class="table-success" {% elif description.get_type_release_display == "Опытное" %}
-                        class="table-warning" {% endif %}>
-                        <td>Тип выпуска:</td>
-                        <td>{{ description.get_type_release_display }}</td>
-                    </tr>
-                    <tr>
-                        <td>Конструктор:</td>
-                        <td>{{ description.constructor }}</td>
-                    </tr>
-                    <tr>
-                        <td>Описание:</td>
-                        <td>{{ description.description }}</td>
-                    </tr>
-                    </tbody>
-                </table>
             {% endblock %}
         </div>
 
