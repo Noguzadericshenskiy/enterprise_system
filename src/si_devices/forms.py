@@ -29,7 +29,6 @@ class DeviceCreateForm(forms.ModelForm):
         # "name": "file_device",
         # "class": "form-control"
 
-
     class Meta:
         model = Device
         fields = [
@@ -46,8 +45,8 @@ class DeviceCreateForm(forms.ModelForm):
 
 
 class DeviceEditForm(forms.ModelForm):
-    name = forms.CharField(widget=forms.TextInput(attrs={}),)
-    version = forms.CharField(widget=forms.TextInput(),)
+    # name = forms.CharField(widget=forms.TextInput(attrs={}),)
+    # version = forms.CharField(widget=forms.TextInput(),)
     # bord = forms.CharField(widget=forms.TextInput(),)
     # firmware = forms.CharField(widget=forms.TextInput(),)
     # decimal_num = forms.CharField(widget=forms.TextInput(),)
@@ -61,8 +60,8 @@ class DeviceEditForm(forms.ModelForm):
         fields = [
             "name",
             "version",
-            # "bord",
-            # "firmware",
+            "bord",
+            "firmware",
             # "decimal_num",
             # "constructor",
             # "type_release",

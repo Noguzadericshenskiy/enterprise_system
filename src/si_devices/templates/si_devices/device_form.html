@@ -1,0 +1,28 @@
+
+<div id="device-form"
+{#    id="ww"#}
+     hx-target="this"   
+{#     hx-target="this"#}
+     hx-swap="outerHTML"
+     >
+    <h3>Редактирование изделия</h3>
+    
+    <form> 
+        {% csrf_token %}
+        {{ form.as_p }}
+
+        <p>device.id {{ device.id }}</p>
+        <button class="btn btn-primary"
+{#            hx-target="#device"  #}
+            hx-put="{% url "si_devices:device-update" device.id %}"    
+{#            hx-get="{% url "si_devices:device-detail" device.id %}"#}
+            hx-target="#device-form"
+{#        hx-swap="outerHTML"#}
+        >Send</button>
+        
+        <button class="btn btn-primary"
+                hx-target="#device"
+                hx-swap="outerHTML">Cancel
+        </button>
+    </form>
+</div>

@@ -13,13 +13,16 @@
     {% block title %} {% endblock %}
 
     <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
-          integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" 
+          href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+          integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" 
+          crossorigin="anonymous">
 
     {% block css %}
         <link rel="stylesheet" href="{% static 'css/style.css' %}">
     {% endblock %}
-
+{#    HTMX   #}
+{#    <script src="{% static 'js/htmx.min.js' %}" defer></script>#}
 
 
     {# Load the tag library #}
@@ -32,7 +35,6 @@
     {# Display django.contrib.messages as Bootstrap alerts #}
     {% bootstrap_messages %}
 
-    <script src="https://unpkg.com/htmx.org@2.0.3/dist/htmx.js" integrity="sha384-BBDmZzVt6vjz5YbQqZPtFZW82o8QotoM7RUp5xOxV3nSJ8u2pSdtzFAbGKzTlKtg" crossorigin="anonymous"></script>
 </head>
 
 <body hx-headers='{"X-CSRFToken": "{{ csrf_token }}"}'>
@@ -62,14 +64,14 @@
                         </a>
 
                         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                            <a class="dropdown-item" href="{% url "si_devices:device_list" %}">Список изделий</a>
-                            <a class="dropdown-item" href="{% url "si_devices:device_create" %}">Добавить изделие</a>
+                            <a class="dropdown-item" href="{% url "si_devices:device-list" %}">Список изделий</a>
+                            <a class="dropdown-item" href="{% url "si_devices:device-create" %}">Добавить изделие</a>
                             <a class="dropdown-item" href="#">Редактировать изделие</a>
                             <a class="dropdown-item" href="#">Удалить изделие</a>
                             <div class="dropdown-divider"></div>
-                            <a class="dropdown-item" href="{% url "si_devices:version_create" %}">Добавить версию</a>
+                            <a class="dropdown-item" href="{% url "si_devices:version-create" %}">Добавить версию</a>
                             <a class="dropdown-item" href="#">Редактировать версию</a>
-                            <a class="dropdown-item" href="{% url "si_devices:version_list" %}">Список версий</a>
+                            <a class="dropdown-item" href="{% url "si_devices:version-list" %}">Список версий</a>
                         </div>
                     </li>
 
@@ -172,8 +174,14 @@
 {% block footer %}{% endblock %}
 <!-- Optional JavaScript -->
 {#<script src="/static/js/htmx.min.js"></script>#}
+<script src="{% static 'js/htmx.min.js' %}" defer></script>
+{#<script>#}
+{#      document.body.addEventListener('htmx:configRequest', (event) => {#}
+{#        event.detail.headers['X-CSRFToken'] = '{{ csrf_token }}';#}
+{#      })#}
+{#</script>#}
 
-<!-- jQuery first, then Popper.js, then Bootstrap JS -->
+{#<!-- jQuery first, then Popper.js, then Bootstrap JS -->#}
 <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
         integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
         crossorigin="anonymous"></script>

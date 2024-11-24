@@ -65,7 +65,7 @@ THIRD_PARTY_APPS = [
     # "django_tables2",
     # "django_filters",
     "bootstrap4",
-    # 'django_htmx',
+    'django_htmx',
     # 'htmx',
 ]
 
@@ -79,6 +79,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    "django_htmx.middleware.HtmxMiddleware"
 ]
 
 # on django-debug-toolbar
@@ -113,7 +114,7 @@ WSGI_APPLICATION = 'enterprise_system.wsgi.application'
 DATABASES = {
         "default": {
             "ENGINE": "django.db.backends.sqlite3",
-             "NAME": "mydatabase",
+             "NAME": os.path.join(BASE_DIR, 'db.sqlite3'),
         }
     # "default": {
     #     'NAME': getenv("DB_NAME"),
