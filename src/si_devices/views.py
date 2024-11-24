@@ -107,9 +107,9 @@ def device_update(request, pk):
 
     if request.method == "PUT":
         logger.info("start put")
-        # qd = QueryDict(request.body)
-        # form = DeviceEditForm(instance=device, data=qd)
-        form = DeviceEditForm(instance=device)
+        qd = QueryDict(request.body)
+        form = DeviceEditForm(instance=device, data=qd)
+        # form = DeviceEditForm(instance=device)
         logger.info(f"form: {form}")
         if form.is_valid():
             device = form.save()
