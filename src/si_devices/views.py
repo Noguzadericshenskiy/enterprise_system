@@ -23,7 +23,7 @@ class VersionCreateView(generic.CreateView):
 
     def get_success_url(self):
         obj = self.object
-        return reverse_lazy("version-success", kwargs={"pk": obj.id})
+        return reverse_lazy("si_devices:version-success", kwargs={"pk": obj.id})
 
 
 class SuccessVersionView(generic.DetailView):
