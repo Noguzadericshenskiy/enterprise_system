@@ -1,0 +1,21 @@
+{% extends "si_system/index.html" %}
+{% load render_table from django_tables2 %}
+{% load static %}
+
+{% block title %}
+    <title>{{ title }}</title>
+{% endblock %}
+
+{% block content %}
+    <h3>Список испытаний.</h3>
+    {% if error_message %}
+        <p><strong>{{ error_message }}</strong></p>
+    {% endif %}
+        
+    {% if context.table %}
+        {% render_table context.table %}
+
+    {% else %}
+        <h4>Список испытаний пока пуст.</h4>
+    {% endif %}
+{% endblock %}

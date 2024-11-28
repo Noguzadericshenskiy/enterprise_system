@@ -14,6 +14,7 @@ loguru = "^0.7.2"
 pillow = "^11.0.0"
 psycopg = {extras = ["binary", "pool"], version = "^3.2.3"}
 django-htmx = "^1.21.0"
+django-tables2 = "^2.7.0"
 
 
 [build-system]

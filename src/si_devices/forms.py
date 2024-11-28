@@ -1,9 +1,7 @@
-import logging
-
 from django import forms
 from django.core.exceptions import ValidationError
 
-from si_devices.models import Device, Version
+from si_devices.models import Device, Version, CHOICES_DEVICE_TYPE_RELEASE
 
 
 class CreateVersionForm(forms.ModelForm):
@@ -25,9 +23,10 @@ class CreateVersionForm(forms.ModelForm):
 
 
 class DeviceCreateForm(forms.ModelForm):
+    decimal_num = forms.CharField(widget=forms.TextInput(), required=False)
+    constructor = forms.CharField(widget=forms.TextInput(), required=False)
+    description = forms.CharField(widget=forms.TextInput(), required=False)
     image = forms.ImageField(widget=forms.FileInput(), required=False)
-        # "name": "file_device",
-        # "class": "form-control"
 
     class Meta:
         model = Device
@@ -46,14 +45,14 @@ class DeviceCreateForm(forms.ModelForm):
 
 class DeviceEditForm(forms.ModelForm):
     # name = forms.CharField(widget=forms.TextInput(attrs={}),)
-    # version = forms.CharField(widget=forms.TextInput(),)
+    # version = forms.CharField(widget=forms.CharField(choices=Version.name, attrs={}),)
     # bord = forms.CharField(widget=forms.TextInput(),)
     # firmware = forms.CharField(widget=forms.TextInput(),)
-    # decimal_num = forms.CharField(widget=forms.TextInput(),)
-    # constructor = forms.CharField(widget=forms.TextInput(),)
-    # type_release = forms.CharField(widget=forms.TextInput(),)
-    # description = forms.CharField(widget=forms.TextInput())
-    # image = forms.ImageField(widget=forms.FileInput(), required=False)
+    decimal_num = forms.CharField(widget=forms.TextInput(), required=False)
+    constructor = forms.CharField(widget=forms.TextInput(), required=False)
+    # type_release = forms.CharField(widget=forms.CharField(choices=CHOICES_DEVICE_TYPE_RELEASE,),)
+    description = forms.CharField(widget=forms.TextInput(), required=False)
+    image = forms.ImageField(widget=forms.FileInput(), required=False)
 
     class Meta:
         model = Device
@@ -62,11 +61,9 @@ class DeviceEditForm(forms.ModelForm):
             "version",
             "bord",
             "firmware",
-            # "decimal_num",
-            # "constructor",
-            # "type_release",
-            # "description",
-            # "image"
+            "decimal_num",
+            "constructor",
+            "type_release",
+            "description",
+            "image"
         ]
-
-

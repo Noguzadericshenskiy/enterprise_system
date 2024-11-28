@@ -4,6 +4,7 @@ from pickletools import read_long1
 from  django.http import HttpResponse
 from django.views import generic
 from django.urls import reverse_lazy, reverse
+from django.http import QueryDict
 from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
 from django.core.files.storage import FileSystemStorage
@@ -100,21 +101,18 @@ class DeviceCreateView(generic.CreateView):
 
 
 def device_update(request, pk):
-    from django.http import QueryDict
-
     device = Device.objects.get(id=pk)
-    logger.info("start update")
 
     if request.method == "PUT":
-        logger.info("start put")
         qd = QueryDict(request.body)
         form = DeviceEditForm(instance=device, data=qd)
-        # form = DeviceEditForm(instance=device)
-        logger.info(f"form: {form}")
-        if form.is_valid():
-            device = form.save()
-            logger.info("start render")
-            return render(request, "si_devices/device_detail.html", {"device": device})
+        if request.htmx:
+            if form.is_valid():
+                device = form.save()
+                context = {"device": device}
+                context["device"] = Device.objects.get(pk=device.id)
+                context["title"] = "Информация о изделии:"
+                return render(request, "si_devices/device_info.html", context)
 
     form = DeviceEditForm(instance=device)
     context = {

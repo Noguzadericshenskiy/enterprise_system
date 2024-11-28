@@ -2,7 +2,6 @@ from django.db import models
 from django.utils import timezone
 
 
-
 CHOICES_DEVICE_TYPE_RELEASE = (
     ("1", "Серия"),
     ("2", "Опытное"),
@@ -44,17 +43,16 @@ class Device(models.Model):
 
     def __str__(self):
         if self.version.name == "00":
-            return f"{self.name} {self.bord}"
+            return f"{self.name}"
         else:
-            return f"{self.name} исп.{self.version.name} {self.bord}"
-
-
-    # objects = DeviceQuerySet.as_manager()
+            return f"{self.name} исп.{self.version.name}"
 
 
 class Version(models.Model):
     name = models.CharField(max_length=10, verbose_name="Версия изделия", unique=True)
     description = models.TextField(verbose_name="Описание", null=True, blank=True)
+    date_created = models.DateTimeField(default=timezone.now, verbose_name="Дата создания")
+    changed_timestamp = models.DateTimeField(auto_now_add=True, verbose_name="Дата изменения", null=True, blank=True)
 
     class Meta:
         verbose_name = "Версия"
@@ -62,6 +60,21 @@ class Version(models.Model):
 
     def __str__(self):
         return f"{self.name}"
+
+
+class Bord(models.Model):
+    name = models.CharField(max_length=50, verbose_name="Версия изделия", unique=True)
+    description = models.CharField(max_length=250, verbose_name="Описание", null=True, blank=True)
+    date_created = models.DateTimeField(default=timezone.now, verbose_name="Дата создания")
+    changed_timestamp = models.DateTimeField(auto_now_add=True, verbose_name="Дата изменения", null=True, blank=True)
+
+    class Meta:
+        verbose_name = "Версия"
+        verbose_name_plural = "Версии"
+
+    def __str__(self):
+        return f"{self.name}"
+
 
 
 

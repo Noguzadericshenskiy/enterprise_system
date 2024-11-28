@@ -56,13 +56,12 @@ PREREQ_APPS = [
 PROJECT_APPS = [
     "si_system.apps.SiSystemConfig",
     "si_devices.apps.SiDevicesConfig",
-    # "si_tests.apps.SiTestsConfig",
+    "si_tests.apps.SiTestsConfig",
     "si_users.apps.SiUsersConfig",
-
 ]
 
 THIRD_PARTY_APPS = [
-    # "django_tables2",
+    "django_tables2",
     # "django_filters",
     "bootstrap4",
     'django_htmx',

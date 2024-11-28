@@ -1,0 +1,17 @@
+<div id="device"
+    hx-target="this"
+    hx-swap="outerHTML">
+    <h3>{{ title }} {{ device.full_name }} </h3>
+    
+    <p>{{ device.name }}</p>
+    <p>{{ device.get_version_display }}</p>
+    <p>{{ device.bord }}</p>
+    <p>{{ device.firmware }}</p>
+    <p>{{ device.decimal_num }}</p>
+    <p>{{ device.constructor }}</p>
+    <p>{{ device.get_type_release_display }}</p>
+    <p>{{ device.description }}</p>
+    <button class="btn btn-primary"
+            hx-get="{% url "si_devices:device-update" device.id %}">Изменить
+    </button>
+</div>
